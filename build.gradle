@@ -17,7 +17,7 @@ apply plugin: 'io.spring.dependency-management'
 
 
 
-group 'org.example.study'
+group 'com.one'
 version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
@@ -27,5 +27,13 @@ repositories {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.projectlombok:lombok')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa') //스프링 부트용 jpa 추상화 라이브러리
+    compile('com.h2database:h2')//h2 : 인메모리 관계형 데이터베이스. 별도의 설치없이 프로젝트 의존성만으로 관리가 가능해짐
+                                //메모리에서 실행되기 때문에 애플리케이션을 재시작할 때만다 초기화되는점을 이용, 테스트
+                                //용도로 많이 사용한다.
+    compile('org.springframework.boot:spring-boot-starter-mustache')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+
