@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>파일 구조도</title>
+</head>
+<body>
+    <h3>
+       스프링부트에 필요한 라이브러리,의존성 설정 파일 - build.gradle
+
+        프로젝트 메인클래스 - com.one.springboot/Application.class
+        연습용 컨트롤러 - com.one.springboot.web/HelloController.class
+        연습용 test 컨트롤러 - test.com.one.springboot.web - HelloControllerTest.class
+        연습용 응답 dto 클래스 - com.one.springboot.web.dto - HelloResponseDto.class
+        연습용 응답 dto test 클래스 - test.com.one.springboot.web - HelloResponseDtoTest.class
+
+        Spring Jpa를 적용시키기 위한 Entity클래스 - com.one.springboot.domain.posts/Posts.class
+        Posts 클래스로 Database에 접근하게 해줄 클래스 - - com.one.springboot.domain.posts/PostsRepository.interface
+        Jpa test 클래스 - test.com.one.springboot.domain.posts/PostsRepositoryTest.class
+
+        실제 실행된 쿼리를 콘솔에서 볼 수 있게 하는 설정파일 - src/main/resources/application.properties
+
+        비즈니스 로직을 수행할 도메인 모델 컨트롤러 - com.one.springboot.web/PostsApiController.class
+        도메인 모델 서비스 - com.one.springboot.service.posts/PostsService.class
+        도메인 dto 클래스 - com.one.springboot.domain.posts.Posts/PostsSaveRequestDto.class
+        도메인 update 위한 dto 클래스 - com.one.springboot.web.dto/PostsUpdateRequestDto.class
+        도메인 모델 test 컨트롤러 - test.com.one.springboot.web/PostsApiControllerTest.class
+
+
+        JPA Auditing 으로 생성시간/수정시간 자동화 하기 위한 클래스(Entity가 생성되어 저장될때 시간이 자동저장) - com.one.springboot.domain/BaseTimeEntity.class
+        JPA Auditing 테스트코딩 - test.com.one.springboot.domain.posts/PostsRepositoryTest.class
+
+        화면을 쉽게 구성하기 위해 머스테치 플러그인 설치 (ctrl+shift+a 누르고 plugins 누르고 mustache검색)
+
+        URL 매핑을 위한 컨트롤러 - com.one.springboot.web/IndexController.class
+        test 컨트롤러 - test.com.one.springboot.web/IndexControllerTest.class
+        게시글 화면 관련 Layout 파일들 - resources/templates/index.mustache
+        게시글 JQuery,bootstrap 등 스크립트 파일 - resources/templates/layout/footer.mustache
+        게시글 css 파일 부분             resources/templates/layout/header.mustache
+
+        버튼 동작 쿼리(JS 코드) 파일 - resources/static/js/app/index.js
+        게시글 수정 삭제 화면 파일 - resources/templates/posts-update.mustache
+        게시글 저장 파일 - resources/templates/posts-update.mustache
+
+        구글 및 네이버 로그인 기능을 사용하기 위한 스프링 시큐리티 관련파일들
+        (구글 API 나 네이버 API에서 선행작업이 필요함)
+
+        해당 기능을 사용하기 위한 클라이언트 아이디와 보안비밀코드 등록 파일 - application-oauth.properties (gitignore 에 추가해서 커밋 안되도록 할 것)
+        사용자 정보를 담당할 도메인 클래스 - com.one.springboot.domain.user/User.class
+        각 사용자의 권한을 관리할 Enum 클래스 - com.one.springboot.domain.user/Role.enum
+        User의 CRUD 를 처리할 interface - com.one.springboot.domain.user/UserRepository.interface
+
+        oauth 라이브러리를 사용한 소셜 로그인 설정 코드 클래스 - com.one.springboot.config.auth/SecurityConfig.class
+        구글로그인 이후 가져온 사용자의 정보들을 기반으로 가입,정보수정,세션저장 등을 담당할 클래스 - com.one.springboot.config.auth/CustomOAuth2UserService.class
+        dto 기능으로 사용할 클래스 - com.one.springboot.config.auth.dto/OAuthAttributes.class
+                                  -com.one.springboot.config.auth.dto/SessionUser.class
+
+        어노테이션 기반 기능으로 개선하기 위한 파일(메소드 인자로 세션값을 바로받게 함) - com.one.springboot.config.auth/@interface LoginUser
+        위의 파일 관련 클래스 - com.one.springboot.config.auth/LoginUserArgumentResolver.class
+        위의 클래스가 스프링에서 인식될 수 있도록 필요한 클래스 - com.one.springboot.config/WebConfig.class
+
+        이후로는 AWS 설정을 해주고 온다.  
+
+
+    </h3>
+
+</body>
+</html>

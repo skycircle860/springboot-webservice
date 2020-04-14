@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-@EnableJpaAuditing //JPA Auditing 어노테이션을 모두 활성화시키기 위한 어노테이션
+//@EnableJpaAuditing //JPA Auditing 어노테이션을 모두 활성화시키기 위한 어노테이션.
 
 @SpringBootApplication //해당 어노테이션으로 인해 스프링 부트의 자동 설정, 스프링 bean 읽기와 생성을 자동으로 설정되게 된다.
                         //여기부터 설정을 읽어가기 때문에, 이 클래스는 항상 프로젝트 최상단에 위치해야 한다.

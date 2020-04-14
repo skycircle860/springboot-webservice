@@ -1,5 +1,6 @@
 package com.one.springboot.web;
 
+import com.one.springboot.config.auth.LoginUser;
 import com.one.springboot.config.auth.dto.SessionUser;
 import com.one.springboot.service.posts.PostsService;
 import com.one.springboot.web.dto.PostsResponseDto;
@@ -18,11 +19,12 @@ public class IndexController {
     private final PostsService postsService;
     private final HttpSession httpSession;
     @GetMapping("/")
-    public String index(Model model){     //model 은 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장 할 수 있다.
-                                         //여기서는 findalldesc 함수로 가져온 결과를 posts로 index.mustache에 전달한다.
+    public String index(Model model, @LoginUser SessionUser user){
+        /** model 은 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장 할 수 있다.
+            여기서는 findalldesc 함수로 가져온 결과를 posts로 index.mustache에 전달한다.
+            LoginUser 관련 설정들을 해주었으므로, 어느 컨트롤러든지 @LoginUser 를 사용해서 세션정보를 가져올 수 있다.
+                                                                                **/
         model.addAttribute("posts",postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("user"); //CustomOAuth2UserService 에서 로그인 성공 시 세션에서 SessionUser를 저장하도록 구성.
-                                                                                 //즉 로그인 성공 시 httpSession.getAttribute("user")에서 값을 가져올 수 있다.
 
         if(user != null){
             System.out.println("check date ==============="+user.getName());
