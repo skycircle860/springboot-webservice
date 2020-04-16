@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Map;
-//스프링 시큐리티 관련 클래스-4
+
 @Getter
 public class OAuthAttributes {
     private Map<String, Object> attributes;

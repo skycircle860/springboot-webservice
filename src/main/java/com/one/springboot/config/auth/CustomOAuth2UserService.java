@@ -20,7 +20,7 @@ import java.util.Collections;
 
 @RequiredArgsConstructor
 @Service
-//스프링 시큐리티 관련 클래스-3
+
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private final UserRepository userRepository;
     private final HttpSession httpSession;
