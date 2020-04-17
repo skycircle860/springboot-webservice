@@ -17,6 +17,6 @@ script: ".gradlew clean build"
 #CI  실행 완료 시 메일로 알람
 
 notifications:
-  email
+  email:
     recipients:
       - circleone78@gmail.com
