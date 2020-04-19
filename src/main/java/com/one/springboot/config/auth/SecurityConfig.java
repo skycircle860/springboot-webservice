@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .oauth2Login()
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
+
     }
 /**.csrf().disable() h2-console 화면을 사용하기 위해 해당옵션들을 disable()
         authorizeRequest - URL별 권한 관리를 설정하는 옵션의 시작점. authorizeRequest가 선언되어야 antMatchers 옵션을 사용 할 수 있다.
