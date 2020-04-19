@@ -17,7 +17,7 @@ before_install:
   - chmod +x gradlew
 
 before_deploy:
-# 기존코드. 아래 세줄은 삭제해도 무방.
+# 기존코드. 아래 세줄은 삭제해도 무방
 #  - zip -r ksjeong-springboot-webservice *
 #  - mkdir -p deploy
 #  - mv ksjeong-springboot-webservice.zip deploy/ksjeong-springboot-webservice.zip
