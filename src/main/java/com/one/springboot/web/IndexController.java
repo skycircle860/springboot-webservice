@@ -27,8 +27,7 @@ public class IndexController {
         model.addAttribute("posts",postsService.findAllDesc());
 
         if(user != null){
-            System.out.println("check date ==============="+user.getName());
-            model.addAttribute("userName",user.getName()); //세션에 저장된 값이 있을때만 model에 userName으로 등록한다. 세션에 값이 없으면 model엔 값이 없으니 로그인 버튼이 보이게됨
+             model.addAttribute("userName",user.getName()); //세션에 저장된 값이 있을때만 model에 userName으로 등록한다. 세션에 값이 없으면 model엔 값이 없으니 로그인 버튼이 보이게됨
         }
 
         return "index";
@@ -45,7 +44,6 @@ public class IndexController {
     @GetMapping("/posts/update/{id}")
     public String postsUpdate(@PathVariable Long id,Model model){
         PostsResponseDto dto = postsService.findById(id);
-        System.out.println("--------------------------"+dto.getContent());
         model.addAttribute("post",dto);
 
         return "posts-update";
