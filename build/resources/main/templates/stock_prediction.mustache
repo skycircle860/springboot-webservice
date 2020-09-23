@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>스프링부트로 시작하는 웹서비스</title>
+    <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8" />
+</head>
+<style>
+    table,thead, th{
+        color:black;
+        background-color:#343a40;
+        border-color:black;
+        vertical-align:bottom;
+        border-bottom:2px solid #dee2e6;
+    }
+
+    table,tbody,th{
+        color:black;
+        border-color:black;
+    }
+    table{
+        color:black;
+        width:100%;
+        margin-bottom:1rem;
+
+    }
+
+    td,th{
+        color:black;
+        padding:.75rem;
+        vertical-align:top;
+        border-top:1px solid #dee2e6;
+    }
+    .top{
+        color : white;
+		background-color:#04B486;
+        opacity:0.9;
+        margin-bottom:10px;
+    }
+    .form-check-input {
+        width:17px;
+        height:17px;
+    }
+
+</style>
+<!--
+        background-image: url('/images/stock1000.png');
+		background-size: contain;
+        background-color:#cc0066;
+        width:800px;
+        height:600px;
+        opacity:0.9;
+        margin-bottom:10px;
+-->
+<body>
+{{>layout/header}}  <!-- 현재 파일을 기준으로 다른 파일을 가져온다.-->
+
+<div class = "top" align="center">
+    <br><br><br>
+    <h2>주식 검색</h2>
+<!--    <input type="text" id="stock_title">-->
+<!--    <button type="button" class="btn btn-success"  id="btn-search">검색</button>-->
+    <br><br><br>
+</div>
+<table><!-- 검색바 바로 아래 각 지표 설명란 -->
+    <tr class="table-primary"><th>PER : (Price-Earning Ratio : 주가수익비율) 지금 시가총액에 달하는 돈을 벌려면 몇년이 걸리는지를 나타 낸 수치.</th></tr>
+    <tr class="table-primary"><th>PEG : (Price-Earning to Growth Rate : 주가이익증가비율) 보통 1 이하일 경우 좋은 수치라고 여겨진다.</th></tr>
+    <tr class="table-primary"><th>BPS : (Book-value Per Share : 주당순자산가치) 기업의 순자산을 발행 주식수로 나눈 것. 기업이 당장 망한다면 한 주당 주주들이 얼마씩 가져갈 수 있는지를 나타내는 지표.</th></tr>
+    <tr class="table-primary"><th>PBR : (Price to Book Ratio : 주가순자산비율) 주가순자산비율이 1 이라면 주가가 순자산의 1 배로 팔린다는 것이고, 주가순자산비율이 100 이라면 주가가 순자산의 100 배로 팔린다는 것.</th></tr>
+
+</table>
+
+<table class="table">
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">19년 12월 결산 데이터를 기준으로 데이터 출력. 당기순이익이 마이너스인 종목은 제외하였다. 수치 옆의 () 안의 값은 18년 12월 결산값 대비 증가율이다.</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row" style="background-color: white;">
+            <div class="form-check form-check-inline" >
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="totalVal" checked>
+                <label class="form-check-label" for="inlineRadio1">매출액 상승률 기준</label>
+            </div>
+            <div class="form-check form-check-inline" >
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="incomeVal">
+                <label class="form-check-label" for="inlineRadio2">당기순이익 증가율 기준</label>
+            </div>
+            <div class="form-check form-check-inline" >
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="priceDescVal">
+                <label class="form-check-label" for="inlineRadio3">주가 차이 내림차순 </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="priceAscVal">
+                <label class="form-check-label" for="inlineRadio4">주가 차이 오름차순 </label>
+            </div>
+            <button type="button" class="btn btn-primary" id = "btn_search">조회</button>
+        </th>
+
+    </tr>
+
+    </tbody>
+</table>
+
+
+<table id="stockDataDefault">
+    <thead class="thead-strong">
+    <tr class="table-info">
+        <th>종목코드</th>
+        <th>종목명</th>
+        <th>분기날짜</th>
+        <th>매출액(억원)</th>
+        <th>영업이익</th>
+        <th>당기순이익</th>
+        <th>순이익률</th>
+        <th>ROE(지배주주)</th>
+        <th>부채비율</th>
+        <th>EPS(원)</th>
+        <th>PER(배)</th>
+        <th>BPS(원)</th>
+        <th>PBR(배)</th>
+        <th>주당배당금(원)</th>
+        <th>시가배당률(%)</th>
+        <th>19년결산가</th>
+        <th>현재가</th>
+        <th>가격차이</th>
+
+    </tr>
+    </thead>
+    <tbody id="tbody">
+    {{#stocks}} <!-- posts 라는 List를 순회한다. java의 for문과 동일하게 생각하면 된다.-->
+
+    <tr>
+        <!-- 변수명들. List에서 뽑아낸 객체의 필드를 사용한다. 추후 per 같은 값들을 추가 해줘야 함.-->
+        <td class="table-danger">{{code}}</td>
+        <td class="table-warning">{{name}}</td>
+        <td class="table-success">{{date}}</td>
+        <td class="table-info">{{total_revenue}} ({{total_revenue_percent}}%)</td>
+        <td class="table-danger">{{gross_profit}} ({{gross_profit_percent}}%)</td>
+        <td class="table-warning">{{total_income}} ({{total_income_percent}}%)</td>
+        <td class="table-info">{{net_profit_margin}} ({{net_profit_margin_percent}}%)</td>
+        <td class="table-danger">{{roe}}</td>
+        <td class="table-warning">{{dept_ratio}} ({{dept_ratio_percent}}%)</td>
+        <td class="table-info">{{eps}}</td>
+        <td class="table-danger">{{per}} ({{per_percent}}%)</td>
+        <td class="table-warning">{{bps}}</td>
+        <td class="table-success">{{pbr}}</td>
+        <td class="table-info">{{per_share}}</td>
+        <td class="table-info">{{yield_ratio}} ({{yield_ratio_percent}}%)</td>
+        <td class="table-info">{{b1yprice}}</td>
+        <td class="table-info">{{nowprice}}</td>
+        <td class="table-info">{{price_percent}}%</td>
+    </tr>
+
+    {{/stocks}}
+    </tbody>
+</table>
+<div id="stockDataDiv" align="center">
+
+</div>
+{{>layout/footer}}
+</body>
+</html>

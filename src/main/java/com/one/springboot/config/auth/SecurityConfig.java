@@ -1,6 +1,5 @@
 package com.one.springboot.config.auth;
 
-import com.one.springboot.domain.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,17 +18,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
-                    .authorizeRequests()
-                    .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/profile").permitAll()
-                    .antMatchers("/api/v1/**").hasRole(Role.USER.name())
-                    .anyRequest().authenticated()
+                    .authorizeRequests() //매핑이 여기서 이루어지는지 모르고 이미지경로 머스태치에서 잡는데 삽질 엄청함. static 까지 썼었는데 왜 안잡힌건지 모르겄지만; 따라치기의 폐해란...
+                    .antMatchers("/", "/css/**", "/static/images/**", "/js/**", "/h2-console/**", "/profile").permitAll()
+                    .antMatchers("/api/v1/**").permitAll() //.hasRole(Role.USER.name())
+//                    .anyRequest().authenticated() //모든 메뉴가 인증된 사용자만 이용할 수 있도록 하는 옵션
                 .and()
                     .logout()
-                        .logoutSuccessUrl("/")
-                .and()
-                    .oauth2Login()
-                        .userInfoEndpoint()
-                            .userService(customOAuth2UserService);
+                        .logoutSuccessUrl("/");
+//                .and()
+//                    .oauth2Login()
+//                        .userInfoEndpoint()
+//                            .userService(customOAuth2UserService);
 
     }
 /**.csrf().disable() h2-console 화면을 사용하기 위해 해당옵션들을 disable()

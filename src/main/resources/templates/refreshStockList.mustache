@@ -1,0 +1,52 @@
+<table>
+    <thead class="thead-strong">
+    <tr class="table-info">
+        <th>종목코드</th>
+        <th>종목명</th>
+        <th>분기날짜</th>
+        <th>매출액(억원)</th>
+        <th>영업이익</th>
+        <th>당기순이익</th>
+        <th>순이익률</th>
+        <th>ROE(지배주주)</th>
+        <th>부채비율</th>
+        <th>EPS(원)</th>
+        <th>PER(배)</th>
+        <th>BPS(원)</th>
+        <th>PBR(배)</th>
+        <th>주당배당금(원)</th>
+        <th>시가배당률(%)</th>
+        <th>19년결산가</th>
+        <th>현재가</th>
+        <th>가격차이</th>
+
+    </tr>
+    </thead>
+    <tbody id="tbody">
+    {{#data}} <!-- posts 라는 List를 순회한다. java의 for문과 동일하게 생각하면 된다.-->
+
+    <tr>
+        <!-- 변수명들. List에서 뽑아낸 객체의 필드를 사용한다. 추후 per 같은 값들을 추가 해줘야 함.-->
+        <td class="table-danger">{{code}}</td>
+        <td class="table-warning">{{name}}</td>
+        <td class="table-success">{{date}}</td>
+        <td class="table-info">{{total_revenue}} ({{total_revenue_percent}}%)</td>
+        <td class="table-danger">{{gross_profit}} ({{gross_profit_percent}}%)</td>
+        <td class="table-warning">{{total_income}} ({{total_income_percent}}%)</td>
+        <td class="table-info">{{net_profit_margin}} ({{net_profit_margin_percent}}%)</td>
+        <td class="table-danger">{{roe}}</td>
+        <td class="table-warning">{{dept_ratio}} ({{dept_ratio_percent}}%)</td>
+        <td class="table-info">{{eps}}</td>
+        <td class="table-danger">{{per}} ({{per_percent}}%)</td>
+        <td class="table-warning">{{bps}}</td>
+        <td class="table-success">{{pbr}}</td>
+        <td class="table-info">{{per_share}}</td>
+        <td class="table-info">{{yield_ratio}} ({{yield_ratio_percent}}%)</td>
+        <td class="table-info">{{b1yprice}}</td>
+        <td class="table-info">{{nowprice}}</td>
+        <td class="table-info">{{price_percent}}%</td>
+    </tr>
+
+    {{/data}}
+    </tbody>
+</table>
